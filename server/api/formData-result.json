@@ -1,0 +1,20 @@
+{
+  "task_data": [
+    {
+      "id": "4CC6A310-9D31-4307-968B-E66503207D36",
+      "element": "Label",
+      "text": "Label",
+      "static": true,
+      "required": false,
+      "bold": false,
+      "italic": false,
+      "content": "Placeholder text...",
+      "canHavePageBreakBefore": true,
+      "canHaveAlternateForm": true,
+      "canHaveDisplayHorizontal": true,
+      "canHaveOptionCorrect": true,
+      "canHaveOptionValue": true,
+      "canPopulateFromApi": true
+    }
+  ]
+}
