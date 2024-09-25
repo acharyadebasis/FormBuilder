@@ -436,12 +436,12 @@ class ReactForm extends React.Component {
       display: 'none',
     };
 
-    const isFormRenderRoute = window.location.href.includes('/formRender');;
+    const isFormRenderRoute = window.location.href.includes('/FormRenderPage');;
     return (
       <div>
           <FormValidator emitter={this.emitter} />
           <div className='react-form-builder-form'>
-            <form encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onBlur={this.handleBlur} onChange={this.handleChange} onSubmit={this.handleSubmit} method={this.props.form_method}>
+            <form style={this.props.style} encType='multipart/form-data' ref={c => this.form = c} action={this.props.form_action} onBlur={this.handleBlur} onChange={this.handleChange} onSubmit={this.handleSubmit} method={this.props.form_method}>
               {this.props.authenticity_token &&
                 <div style={formTokenStyle}>
                   <input name='utf8' type='hidden' value='&#x2713;' />
@@ -449,19 +449,16 @@ class ReactForm extends React.Component {
                   <input name='task_id' type='hidden' value={this.props.task_id} />
                 </div>
               }
-              {items}
-              <div className='btn-toolbar'>
+              <div style={{ padding: '20px' }}> 
+            {items}
+          </div>
+              <div className='btn-toolbar' style={{ padding: '20px' }}>
               {isFormRenderRoute && (
               <button type='submit'>
                 {this.props.action_name || 'Submit'}
-              Submit</button>
+              </button>
             )}
-                {/* {!this.props.hide_actions &&
-                  this.handleRenderSubmit()
-                }
-                {!this.props.hide_actions && this.props.back_action &&
-                  this.handleRenderBack()
-                } */}
+                
               </div>
             </form>
           </div>

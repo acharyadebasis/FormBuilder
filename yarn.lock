@@ -1212,6 +1212,11 @@
     intl-messageformat "9.13.0"
     tslib "^2.1.0"
 
+"@fortawesome/fontawesome-free@^6.6.0":
+  version "6.6.0"
+  resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-6.6.0.tgz"
+  integrity sha512-60G28ke/sXdtS9KZCpZSHHkCbdsOGEhIUGlwq6yhY74UpTiToIh8np7A8yphhM4BWsvNFtIvLpi4co+h9Mr9Ow==
+
 "@hypnosphi/create-react-context@^0.3.1":
   version "0.3.1"
   resolved "https://registry.npmjs.org/@hypnosphi/create-react-context/-/create-react-context-0.3.1.tgz"
@@ -3726,6 +3731,11 @@ follow-redirects@^1.0.0, follow-redirects@^1.15.6:
   resolved "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.15.9.tgz"
   integrity sha512-gew4GsXizNgdoRyqmyfMHyAmXsZDk6mHkSxZFCzW9gwlbtOW44CDtYavM+y+72qD/Vq2l550kMF52DT8fOLJqQ==
 
+font-awesome@^4.7.0:
+  version "4.7.0"
+  resolved "https://registry.npmjs.org/font-awesome/-/font-awesome-4.7.0.tgz"
+  integrity sha512-U6kGnykA/6bFmg1M/oT9EkFeIYv7JlX3bozwQJWiiLz6L0w3F5vBVPxHlwyX/vtNq1ckcpRKOB9f2Qal/VtFpg==
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.npmjs.org/for-in/-/for-in-1.0.2.tgz"
@@ -5930,6 +5940,11 @@ react-draft-wysiwyg@^1.14.7:
     linkify-it "^2.2.0"
     prop-types "^15.7.2"
 
+react-icons@^5.3.0:
+  version "5.3.0"
+  resolved "https://registry.npmjs.org/react-icons/-/react-icons-5.3.0.tgz"
+  integrity sha512-DnUk8aFbTyQPSkCfF8dbX6kQjXA9DktMeJqfjrg6cK9vwQVMxmcA3BfP4QoiztVmEHtwlTgLFsPuH2NskKT6eg==
+
 react-input-autosize@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npmjs.org/react-input-autosize/-/react-input-autosize-3.0.0.tgz"
@@ -6031,7 +6046,7 @@ react-transition-group@^4.3.0:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
 
-"react@^15.5.x || ^16.x || ^17.x || ^18.x", react@^16.14.0, "react@^16.3.0 || ^17.0.0", "react@^16.3.0 || 17 || 18", "react@^16.8.0 || ^17.0.0", react@^16.8.2, "react@^16.9.0 || ^17", "react@>= 16.9.0", react@>=0.14.0, "react@>=0.14.0 <17.0.0", react@>=16.3.0, react@>=16.6.0, react@>=16.8, "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x", "react@0.14 - 18", "react@0.14.x || ^15.0.0 || ^16.0.0 || ^17.0.0":
+react@*, "react@^15.5.x || ^16.x || ^17.x || ^18.x", react@^16.14.0, "react@^16.3.0 || ^17.0.0", "react@^16.3.0 || 17 || 18", "react@^16.8.0 || ^17.0.0", react@^16.8.2, "react@^16.9.0 || ^17", "react@>= 16.9.0", react@>=0.14.0, "react@>=0.14.0 <17.0.0", react@>=16.3.0, react@>=16.6.0, react@>=16.8, "react@0.13.x || 0.14.x || ^15.0.0-0 || 15.x.x || ^16.0.0-0 || ^16.x.x || ^17.x.x", "react@0.14 - 18", "react@0.14.x || ^15.0.0 || ^16.0.0 || ^17.0.0":
   version "16.14.0"
   resolved "https://registry.npmjs.org/react/-/react-16.14.0.tgz"
   integrity sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==

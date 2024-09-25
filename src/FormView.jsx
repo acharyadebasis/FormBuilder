@@ -4,6 +4,11 @@ import FormBuilder from './index'; // Adjust the import according to your file s
 import * as variables from '../variables'; // Adjust the import according to your file structure
 import DemoBar from '../demobar';
 import DynamicForm from './DynamicForm'; // Import the DynamicForm component
+import { FaEdit } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
+
+
+
 
 const url = '/api/formdata';
 const saveUrl = '/api/formdata';
@@ -185,38 +190,23 @@ class FormView extends React.Component {
         </td>
         <td style={{ padding: '8px', borderBottom: '1px solid #ddd' }}>
           <div style={{ display: 'flex', gap: '5px' }}>
-            <button 
-              onClick={() => this.editClick(item._id)} 
-              style={{
-                padding: '5px 10px',
-                backgroundColor: '#28a745',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s',
-              }}
-              onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#218838'; }}
-              onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#28a745'; }}
-            >
-              Edit
-            </button>
-            <button 
+          <button onClick={() => this.editClick(item._id) } style={{ backgroundColor : '#dc3545' }}
+             onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#c82333'; }}
+             onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#dc3545'; }}
+             >
+            <FaEdit style={{ marginRight: '5px' }} /> Edit
+          </button>
+
+
+          <button 
               onClick={() => this.deleteFormData(item._id)} 
-              style={{
-                padding: '5px 10px',
-                backgroundColor: '#dc3545',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer',
-                transition: 'background-color 0.3s',
-              }}
+              style={{backgroundColor : '#dc3545'}}
               onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = '#c82333'; }}
               onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = '#dc3545'; }}
             >
-              Delete Form Data
+              <FaTrash style={{ marginRight: '5px' }} /> Delete
             </button>
+
           </div>
         </td>
       </tr>

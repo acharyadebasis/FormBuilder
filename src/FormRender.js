@@ -3,18 +3,17 @@ import axios from 'axios';
 import FormBuilder from './index'; // Adjust the import according to your file structure
 import * as variables from '../variables'; // Adjust the import according to your file structure
 import DemoBar from '../demobar';
-// import DynamicForm from './DynamicForm'; 
-
-
-
-// import * as variables from '../variables';
-import store from './stores/store';
+import { FormContext } from './FormContext'; // Import FormContext
 import { ReactFormGenerator } from './index';
+import store from './stores/store';
 
 const url = '/api/formdata';
 const saveUrl = '/api/formdata';
 const answers = {};
+
 class FormRender extends React.Component {
+  static contextType = FormContext;
+
   constructor(props) {
     super(props);
 
@@ -33,13 +32,13 @@ class FormRender extends React.Component {
 
   componentDidMount() {
     this.fetchData();
-    console.log("Fetch>>>>>:",this.state.data)
+    console.log("Fetch>>>>>:", this.state.data);
   }
 
   fetchData = async () => {
     try {
       const response = await axios.get('/api/formdata/forms');
-      console.log(response.data)
+      console.log(response.data);
       
       this.setState({ data: response.data });
     } catch (error) {
@@ -47,13 +46,6 @@ class FormRender extends React.Component {
       alert('An error occurred while fetching data. Check the console for details.');
     }
   };
-
-  // togglePreview = (item) => {
-  //   this.setState(prevState => ({
-  //     previewVisible: !prevState.previewVisible,
-  //     previewData: item ? item.task_data : null,
-  //   }));
-  // };
 
   editClick = async (id) => {
     console.log(id);
@@ -96,50 +88,47 @@ class FormRender extends React.Component {
     URL.revokeObjectURL(url);
   };
 
+  showPreview = (item,id) => {
+    // console.log("<<<<<<<<<<<<<<<<first>>>>>>>>>>>>>>>>", formData);
+    this.context.setPreviewData(item); 
+    // const currentItem = this.state.data.find(item => item._id === id);
+    // console.log(item);
+//  console.log(">>>>",item)
+
+    this.props.navigate('/FormRenderPage');
 
 
+// this.setState({
+//   previewVisible: true,
+//   previewData:formData
+// });
+  };
 
-  showPreview=(formData)=> {
-    console.log("<<<<<<<<<<<<<<<<first>>>>>>>>>>>>>>>>",formData)
-    // this.saveFormData();
-    this.setState({
-      previewVisible: true,
-      previewData:formData
-    });
-   
-  }
-  saveFormData() {
-    store.dispatch('post');
-  }
   _onChange(data) {
     this.setState({
       data,
     });
   }
+
   closePreview() {
     this.setState({
       previewVisible: false,
       previewData: null
-      
     });
     this.fetchData();
   }
+
   handleSubmit = async (data) => {
-    console.log("data=====>>>", data);
+    // console.log("data=====>>>", data);
   
-    axios.post('api/submitteddata', {data})
-  .then(response => {
-    console.log('Data submitted:', response.data);
-  })
-  .catch(error => {
-    console.error('Error posting data:', error);
-  });
-
+    axios.post('api/submitteddata', { data })
+      .then(response => {
+        console.log('Data submitted:', response.data);
+      })
+      .catch(error => {
+        console.error('Error posting data:', error);
+      });
   };
-
-
-
-
 
   render() {
     const linkContainerStyles = {
@@ -154,13 +143,10 @@ class FormRender extends React.Component {
       fontFamily: 'Arial, sans-serif',
     };
 
-
     let modalClass = 'modal';
     if (this.state.previewVisible) {
       modalClass += ' show d-block';
     }
-
-   
 
     return (
       <div>
@@ -169,14 +155,13 @@ class FormRender extends React.Component {
           <b><a href='/' style={{ textDecoration: 'none', color: 'white' }}>Back to Home</a><br /></b>
         </div>
 
-
-        { this.state.previewVisible &&
+        {this.state.previewVisible &&
           <div className={modalClass} role="dialog">
             <div className="modal-dialog modal-lg" role="document">
               <div className="modal-content">
-                {console.log("answer:",answers)}
-                {console.log("data:",this.state.previewData)}
-                {console.log("variables:",this.props.variables)}
+                {console.log("answer:", answers)}
+                {console.log("data:", this.state.previewData)}
+                {console.log("variables:", this.props.variables)}
                 <ReactFormGenerator
                   download_path=""
                   back_action="/"
@@ -186,22 +171,19 @@ class FormRender extends React.Component {
                   action_name="Save"
                   form_action="/api/form"
                   form_method="POST"
-                  // skip_validations={true}
-                  // onSubmit={this._onSubmit}
                   variables={variables}
                   data={this.state.previewData}
-                  locale='en'/>
+                  locale='en'
+                />
 
-                  <div className="modal-footer">
-                    <button type="submit" className="btn btn-default" data-dismiss="modal" onClick={()=>this.closePreview()}>Close</button>
-                  </div>
-
+                <div className="modal-footer">
+                  <button type="button" className="btn btn-default" data-dismiss="modal" onClick={() => this.closePreview()}>Close</button>
+                </div>
               </div>
             </div>
           </div>
         }
 
-        {/* Edit Form Modal */}
         {this.state.check && (
           <div style={modalStyles}>
             <div style={modalContentStyles}>
@@ -219,49 +201,32 @@ class FormRender extends React.Component {
           </div>
         )}
 
-<table style={{ width: '100%', borderCollapse: 'collapse' }}>
-  <thead>
-    <tr>
-      <th style={{ textAlign: 'left', padding: '8px', borderBottom: '2px solid #ddd' }}>Forms</th>
-      {/* <th style={{ textAlign: 'left', padding: '8px', borderBottom: '2px solid #ddd' }}>Actions</th> */}
-    </tr>
-  </thead>
-  <tbody>
-    {this.state.data.map((item) => (
-      <tr key={item._id}>
-        <td style={{ padding: '8px' }}>
-          <span style={{ marginRight: '5px', color: '#007BFF' }}>•</span>
-
-
-          
-              <a href="#" onClick={() => this.showPreview(item.task_data)}
-                style={{
-                  fontSize: '18px',
-                  fontWeight: 'bold',
-                  color: '#007BFF',
-                  textDecoration: 'none',
-                  transition: 'background-color 0.3s, color 0.3s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = '#E0E0E0';
-                  e.currentTarget.style.color = '#0056b3';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'transparent';
-                  e.currentTarget.style.color = '#007BFF';
-                }}>
-                Form {item.name}
-              </a>
-              </td>
-              {/* <button onClick={() => this.editClick(item._id)}>Edit</button> */}
-              {/* <button onClick={() => this.togglePreview(item)}>Preview</button> */}
-              {/* {console.log(item.task_data)} */}
-              {/* <button  onClick={}>Preview Form</button> */}
-           </tr>
-           ))}
-           </tbody>
-           </table>
-           
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th style={{ textAlign: 'left', padding: '8px', borderBottom: '2px solid #ddd' }}>Forms</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.data.map((item) => (
+              <tr key={item._id}>
+                <td style={{ padding: '8px' }}>
+                  <span style={{ marginRight: '5px', color: '#007BFF' }}>•</span>
+                  <a href="#" onClick={() => this.showPreview(item,item._id)}
+                    style={{
+                      fontSize: '18px',
+                      fontWeight: 'bold',
+                      color: '#007BFF',
+                      textDecoration: 'none',
+                      transition: 'background-color 0.3s, color 0.3s',
+                    }}>
+                    Form {item.name}
+                  </a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -299,5 +264,4 @@ const closeButtonStyles = {
   fontSize: '32px',
 };
 
-
-export default FormRender
+export default FormRender;
